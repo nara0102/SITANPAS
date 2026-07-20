@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Products</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Debug Products Loading</h1>
+    <div id="status">Loading...</div>
+    <div id="products"></div>
+
+    <script>
+        const { createClient } = supabase;
+        
+        const supabaseClient = createClient(
+            'https://bdpycyvqacnobyirqzpm.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkcHljeXZxYWNub2J5aXJxenBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxMDY3NDEsImV4cCI6MjA3MzY4Mjc0MX0.jM6G5NuQbpkWgMX85EC0vPLlkmRh6skAi6XwxXNFzLI'
+        );
+
+        async function testProducts() {
+            const statusDiv = document.getElementById('status');
+            const productsDiv = document.getElementById('products');
+            
+            try {
+                statusDiv.innerHTML = 'Testing connection...';
+                
+                // Test the exact query from the React app
+                const { data, error } = await supabaseClient
+                    .from('products')
+                    .select(`
+                        id,
+                        nama_produk,
+                        deskripsi,
+                        harga,
+                        stok,
+                        image_url,
+                        nelayan_id,
+                        status,
+                        kategori,
+                        berat_per_unit,
+                        unit_type,
+                        created_at,
+                        updated_at,
+                        users!products_nelayan_id_fkey (
+                            id,
+                            full_name,
+                            phone,
+                            email
+                        )
+                    `)
+                    .eq('status', 'active')
+                    .gt('stok', 0)
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    statusDiv.innerHTML = `❌ Error: ${error.message}`;
+                    console.error('Supabase error:', error);
+                } else {
+                    statusDiv.innerHTML = `✅ Success: Found ${data.length} products`;
+                    productsDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    console.log('Products:', data);
+                }
+            } catch (err) {
+                statusDiv.innerHTML = `❌ Exception: ${err.message}`;
+                console.error('Exception:', err);
+            }
+        }
+
+        // Run test when page loads
+        testProducts();
+    </script>
+</body>
+</html>
