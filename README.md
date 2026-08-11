@@ -1,7 +1,9 @@
 # 🐟 SITANPAS — Sistem Informasi Tangkapan Nelayan dan Pemasaran
 **Status**: ✅ **PRODUCTION READY** | **Version**: 2.0 | **Last Updated**: Agustus 2026
 
-![SITANPAS Banner](Public/SITANPAS_v2.png)
+<p align="center">
+  <img src="public/SITANPAS_v2.png" alt="SITANPAS_v2" width="100%" />
+</p>
 
 > **Proyek Tugas Akhir (TA) / Skripsi**  
 > **Program Studi S1 Teknik Informatika — Universitas Tadulako**  
