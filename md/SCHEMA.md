@@ -3,7 +3,9 @@
 ## 1. Daftar Tabel Utama
 
 ### A. Tabel `users`
+
 Menyimpan profil pengguna yang terhubung dengan `auth.users`.
+
 * `id` (`uuid`, Primary Key, Foreign Key $\rightarrow$ `auth.users.id` ON DELETE CASCADE)
 * `email` (`text`, Unique, Not Null)
 * `role` (`user_role` ENUM: `'admin'`, `'nelayan'`, `'customer_guest'`)
@@ -12,7 +14,9 @@ Menyimpan profil pengguna yang terhubung dengan `auth.users`.
 * `created_at`, `updated_at` (`timestamp with time zone`)
 
 ### B. Tabel `pending_nelayan`
+
 Antrean verifikasi pendaftaran nelayan oleh Admin.
+
 * `id` (`uuid`, Primary Key, Default `uuid_generate_v4()`)
 * `user_id` (`uuid`, Foreign Key $\rightarrow$ `users.id` ON DELETE CASCADE, Unique)
 * `nama` (`text`), `alamat` (`text`), `nomor_telpon` (`text`, Check `length >= 10`)
@@ -20,7 +24,9 @@ Antrean verifikasi pendaftaran nelayan oleh Admin.
 * `admin_notes` (`text`), `reviewed_by` (`uuid`), `reviewed_at` (`timestamp`)
 
 ### C. Tabel `products`
+
 Katalog barang dagangan ikan yang diunggah Nelayan.
+
 * `id` (`uuid`, Primary Key)
 * `nelayan_id` (`uuid`, Foreign Key $\rightarrow$ `users.id` ON DELETE CASCADE)
 * `nama_produk` (`text`), `deskripsi` (`text`), `kategori` (`text`)
@@ -30,7 +36,9 @@ Katalog barang dagangan ikan yang diunggah Nelayan.
 * `image_url` (`text`)
 
 ### D. Tabel `orders`
+
 Data pesanan yang dibuat oleh pembeli (*Guest Customer*).
+
 * `id` (`uuid`, Primary Key)
 * `customer_nama` (`text`), `customer_telpon` (`text`), `customer_alamat` (`text`)
 * `produk_id` (`uuid`, Foreign Key $\rightarrow$ `products.id`)
@@ -38,7 +46,9 @@ Data pesanan yang dibuat oleh pembeli (*Guest Customer*).
 * `status` (`order_status` ENUM: `'pending'`, `'paid'`, `'shipped'`, `'completed'`, `'cancelled'`)
 
 ### E. Tabel `transactions`
+
 Pencatatan arus kas transaksi pesanan.
+
 * `id` (`uuid`, Primary Key)
 * `order_id` (`uuid`, Foreign Key $\rightarrow$ `orders.id`, Unique)
 * `nelayan_id` (`uuid`, Foreign Key $\rightarrow$ `users.id`)
@@ -74,3 +84,4 @@ Pencatatan arus kas transaksi pesanan.
   * `SELECT` pada `orders` & `transactions` terkait produk milik nelayan.
 * **Admin (`authenticated` with role `'admin'`):**
   * Full Access (Read, Write, Update, Delete) di seluruh tabel, *views*, dan *storage buckets*.
+  

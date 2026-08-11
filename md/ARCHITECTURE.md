@@ -1,6 +1,7 @@
 # 🏗️ Technical Architecture & Environment — SITANPAS v2
 
 ## 1. Spesifikasi Tech Stack
+
 * **Front-End Framework:** React `v18.3.x`
 * **Build Tool & Bundler:** Vite `v5.x`
 * **Language:** TypeScript `v5.x`
@@ -13,6 +14,7 @@
 ---
 
 ## 2. Struktur Folder Proyek
+
 ```text
 SITANPAS/
 ├── md/                         # File dokumentasi proyek (PRD.md, ARCHITECTURE.md, SCHEMA.md)
@@ -66,6 +68,8 @@ SITANPAS/
 ---
 
 ## 3 . Konfigurasi Environment Variables (.env.example)
+
+```env
 #Supabase Configuration
 VITE_SUPABASE_URL=[https://your-project-id.supabase.co](https://your-project-id.supabase.co)
 VITE_SUPABASE_ANON_KEY=your-anon-key-here
@@ -74,10 +78,12 @@ VITE_SUPABASE_ANON_KEY=your-anon-key-here
 VITE_APP_NAME="SITANPAS v2"
 VITE_APP_VERSION="2.0.0"
 VITE_APP_ENVIRONMENT=production
+```
 
 ---
 
 ## 4. Alur Deployment (Netlify & Supabase)
+
 1. Database & Backend: Dikelola penuh di Supabase Cloud. Seluruh skema, triggers, dan RLS dieksekusi melalui file `supabase/migrations/20260811145741_sitanpas_v2_init.sql.`
 2. Storage Bucket: Bucket `fish-photos` dikonfigurasi sebagai Public dengan RLS insert restriction untuk pengguna tersertifikasi.
 3. Frontend CD (Netlify):

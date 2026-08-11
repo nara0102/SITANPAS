@@ -18,7 +18,7 @@ export const useThingSpeak = (
     error: null,
     lastUpdated: null,
   });
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isRequestInProgress = useRef(false);
 
   const fetchData = useCallback(async () => {

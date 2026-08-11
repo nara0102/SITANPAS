@@ -1,14 +1,10 @@
 # 🐟 SITANPAS v2 — Sistem Informasi Tangkapan Nelayan dan Pemasaran
 
-<p align="center">
-  <img src="public/SITANPAS_v2.png" alt="SITANPAS v2 Banner & Kolaborasi Akademik" width="100%" />
-</p>
+![SITANPAS v2 Banner & Kolaborasi Akademik](public/SITANPAS_v2.png)
 
-<p align="center">
-  <a href="#-tentang-sitanpas-v2"><img src="https://img.shields.io/badge/Version-2.0.0-blue.svg" alt="Version 2.0.0"></a>
-  <a href="#-konteks-akademik--program"><img src="https://img.shields.io/badge/Hibah-DRPM_Kemendiktisaintek_2025-green.svg" alt="DRPM 2025"></a>
-  <a href="#-lisensi"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT"></a>
-</p>
+[![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-blue.svg)](#-tentang-sitanpas-v2)
+[![DRPM 2025](https://img.shields.io/badge/Hibah-DRPM_Kemendiktisaintek_2025-green.svg)](#-konteks-akademik--program)
+[![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#-lisensi)
 
 ---
 
@@ -17,6 +13,7 @@
 **SITANPAS v2** (Sistem Informasi Tangkapan Nelayan dan Pemasaran Versi 2) adalah platform *digital marketplace* dan manajemen perikanan tangkap berbasis web yang dirancang untuk memodernisasi ekosistem perdagangan hasil laut di kawasan pesisir Desa Ambesia Selatan, Kabupaten Parigi Moutong, Sulawesi Tengah.
 
 Versi 2.0 ini merupakan **pengembangan dan penyempurnaan sistem secara menyeluruh** yang mencakup:
+
 1. **Peningkatan Performa & Arsitektur Database:** Refactoring total skema basis data PostgreSQL (Supabase) dengan mengintegrasikan aturan *Row Level Security* (RLS) terpadu, fungsi otomatisasi (*triggers*), dan *Database Views* untuk analitik real-time.
 2. **Optimalisasi Alur Pengguna (User Flow):** Penataan ulang hak akses multi-peran (*Admin*, *Nelayan*, dan *Customer Guest*) serta penyempurnaan alur pemesanan langsung tanpa wajib registrasi (*Guest Checkout*).
 3. **Penyempurnaan Antarmuka (UI/UX):** Pembaruan komponen antarmuka yang lebih responsif, bersih, dan siap untuk tahap komersialisasi publik.
