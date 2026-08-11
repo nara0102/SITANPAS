@@ -4,11 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # Disable secrets scanning for Supabase public keys
   SECRETS_SCAN_ENABLED = "false"
-  # Production environment
-  NODE_ENV = "production"
-  # Enable build optimizations
   CI = "true"
   GENERATE_SOURCEMAP = "false"
 
@@ -46,7 +42,6 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://api.thingspeak.com wss://*.supabase.co; frame-ancestors 'none';"
 
-# Performance optimizations
 [[headers]]
   for = "/sw.js"
   [headers.values]
