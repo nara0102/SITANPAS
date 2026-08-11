@@ -1,7 +1,7 @@
 # 📄 Product Requirement Document (PRD) — SITANPAS v2
 
 ## 1. Deskripsi Proyek
-**SITANPAS v2** (Sistem Informasi Transaksi Hasil Laut Pasang) adalah platform *digital marketplace* berbasis web yang dirancang untuk memodernisasi ekosistem perdagangan hasil laut di Palu, Sulawesi Tengah. Platform ini menghubungkan nelayan lokal secara langsung dengan pembeli publik, dilengkapi integrasi data penimbangan (IoT ESP32), verifikasi penjual berbasis persetujuan admin, serta manajemen stok dan transaksi otomatis.
+**SITANPAS v2** (Sistem Informasi Tangkapan Nelayan dan Pemasaran) adalah platform *digital marketplace* berbasis web yang dirancang untuk memodernisasi ekosistem perdagangan hasil laut di Desa Ambesia Selatan, Kabupaten Parigi Moutong, Sulawesi Tengah. Platform ini menghubungkan nelayan lokal secara langsung dengan pembeli publik, dilengkapi integrasi data penimbangan (IoT ESP32), verifikasi penjual berbasis persetujuan admin, serta manajemen stok dan transaksi otomatis.
 
 ## 2. Target Pengguna
 1. **Public Customer (Pembeli):** Masyarakat umum yang membeli hasil laut segar secara langsung tanpa kewajiban pendaftaran akun (*Guest Checkout*).

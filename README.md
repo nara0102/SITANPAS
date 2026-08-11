@@ -1,4 +1,5 @@
-# 🐟 SITANPAS v2 — Sistem Informasi Transaksi Hasil Laut Pasang
+# 🐟 SITANPAS — Sistem Informasi Tangkapan Nelayan dan Pemasaran
+**Status**: ✅ **PRODUCTION READY** | **Version**: 2.0 | **Last Updated**: Agustus 2026
 
 ![SITANPAS Banner](public/logo.png)
 

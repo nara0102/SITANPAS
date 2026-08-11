@@ -66,17 +66,16 @@ SITANPAS/
 ---
 
 ## 3 . Konfigurasi Environment Variables (.env.example)
-# Supabase Configuration
+#Supabase Configuration
 VITE_SUPABASE_URL=[https://your-project-id.supabase.co](https://your-project-id.supabase.co)
 VITE_SUPABASE_ANON_KEY=your-anon-key-here
 
----
-
-# Application Metadata
+#Application Metadata
 VITE_APP_NAME="SITANPAS v2"
 VITE_APP_VERSION="2.0.0"
 VITE_APP_ENVIRONMENT=production
 
+---
 
 ## 4. Alur Deployment (Netlify & Supabase)
 1. Database & Backend: Dikelola penuh di Supabase Cloud. Seluruh skema, triggers, dan RLS dieksekusi melalui file `supabase/migrations/20260811145741_sitanpas_v2_init.sql.`

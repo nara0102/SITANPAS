@@ -1,4 +1,3 @@
-```markdown
 # 🗄️ Database Schema & RLS Specification — SITANPAS v2
 
 ## 1. Daftar Tabel Utama
