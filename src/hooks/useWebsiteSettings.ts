@@ -25,7 +25,7 @@ export const useWebsiteSettings = () => {
     settings,
     loading,
     error,
-    siteName: 'NelayanFresh',
+    siteName: 'SITANPAS v2',
     siteDescription: 'Marketplace Nelayan',
     siteLogo: '/favicon.ico',
     siteIcon: '/favicon.ico'

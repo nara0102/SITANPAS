@@ -88,7 +88,7 @@ const Dashboard = () => {
             <Card className="border-0 sm:border shadow-none sm:shadow">
               <CardHeader className="px-0 sm:px-6 pt-0 sm:pt-6">
                 <CardTitle className="text-lg sm:text-xl lg:text-2xl">Manajemen Produk</CardTitle>
-                <CardDescription className="text-sm sm:text-base">Tambah, edit, dan kelola produk ikan Anda</CardDescription>
+                <CardDescription className="text-sm sm:text-base">Tambah, edit, dan kelola produk Anda</CardDescription>
               </CardHeader>
               <CardContent className="px-0 sm:px-6 pb-0 sm:pb-6">
                 <DashboardErrorBoundary fallbackTitle="Error Manajemen Produk" fallbackMessage="Terjadi kesalahan saat memuat manajemen produk. Silakan coba lagi.">

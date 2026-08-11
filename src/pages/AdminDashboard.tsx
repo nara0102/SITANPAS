@@ -431,13 +431,13 @@ const AdminDashboard = () => {
                       <>
                         <div className="flex-1 p-2 bg-gray-50 rounded border">
                           <span className="font-medium">
-                            {websiteSettings.find(s => s.setting_key === 'site_name')?.setting_value || 'NelayanFresh'}
+                            {websiteSettings.find(s => s.setting_key === 'site_name')?.setting_value || 'SITANPAS v2'}
                           </span>
                         </div>
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handleSettingEdit('site_name', websiteSettings.find(s => s.setting_key === 'site_name')?.setting_value || 'NelayanFresh')}
+                          onClick={() => handleSettingEdit('site_name', websiteSettings.find(s => s.setting_key === 'site_name')?.setting_value || 'SITANPAS v2')}
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
@@ -570,7 +570,7 @@ const AdminDashboard = () => {
                       </div>
                       <div>
                         <h3 className="font-bold text-lg text-primary">
-                          {websiteSettings.find(s => s.setting_key === 'site_name')?.setting_value || 'NelayanFresh'}
+                          {websiteSettings.find(s => s.setting_key === 'site_name')?.setting_value || 'SITANPAS v2'}
                         </h3>
                         <p className="text-sm text-gray-600">
                           {websiteSettings.find(s => s.setting_key === 'site_description')?.setting_value || 'Marketplace Nelayan'}

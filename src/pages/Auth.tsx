@@ -404,7 +404,7 @@ const Auth = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        placeholder="nelayan@example.com"
+                        placeholder="name@nelayan.com"
                         className="h-11 lg:h-12 text-sm lg:text-base border-gray-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200 hover:border-gray-300"
                         required
                       />
@@ -438,7 +438,7 @@ const Auth = () => {
                         type="text"
                         value={formData.location}
                         onChange={handleInputChange}
-                        placeholder="Contoh: Pelabuhan Ratu, Sukabumi"
+                        placeholder="Contoh: Ambesia Selatan, Parigi Moutong"
                         className="h-11 lg:h-12 text-sm lg:text-base border-gray-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200 hover:border-gray-300"
                         required
                       />
