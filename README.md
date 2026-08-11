@@ -1,68 +1,74 @@
-# 🐟 SITANPAS — Sistem Informasi Tangkapan Nelayan dan Pemasaran
-**Status**: ✅ **PRODUCTION READY** | **Version**: 2.0 | **Last Updated**: Agustus 2026
+# 🐟 SITANPAS v2 — Sistem Informasi Tangkapan Nelayan dan Pemasaran
 
 <p align="center">
-  <img src="public/SITANPAS_v2.png" alt="SITANPAS_v2" width="100%" />
+  <img src="public/SITANPAS_v2.png" alt="SITANPAS v2 Banner & Kolaborasi Akademik" width="100%" />
 </p>
 
-> **Proyek Tugas Akhir (TA) / Skripsi**  
-> **Program Studi S1 Teknik Informatika — Universitas Tadulako**  
-> **Pengembang:** Lukman Hakim  
+<p align="center">
+  <a href="#-tentang-sitanpas-v2"><img src="https://img.shields.io/badge/Version-2.0.0-blue.svg" alt="Version 2.0.0"></a>
+  <a href="#-konteks-akademik--program"><img src="https://img.shields.io/badge/Hibah-DRPM_Kemendiktisaintek_2025-green.svg" alt="DRPM 2025"></a>
+  <a href="#-lisensi"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT"></a>
+</p>
 
 ---
 
-## 📌 Tentang Proyek
-**SITANPAS v2** (Sistem Informasi Tangkapan Nelayan dan Pemasaran) adalah platform *digital marketplace* berbasis web yang dirancang untuk memodernisasi ekosistem perdagangan hasil laut di Ambesia Selatan, Parigi Moutong, Sulawesi Tengah. Platform ini menghubungkan nelayan lokal secara langsung dengan pembeli publik, dilengkapi dengan sistem verifikasi penjual berbasis persetujuan admin, integrasi timbangan digital IoT (*Internet of Things*), serta otomatisasi stok dan transaksi *real-time*.
+## 📌 Tentang SITANPAS v2
+
+**SITANPAS v2** (Sistem Informasi Tangkapan Nelayan dan Pemasaran Versi 2) adalah platform *digital marketplace* dan manajemen perikanan tangkap berbasis web yang dirancang untuk memodernisasi ekosistem perdagangan hasil laut di kawasan pesisir Desa Ambesia Selatan, Kabupaten Parigi Moutong, Sulawesi Tengah.
+
+Versi 2.0 ini merupakan **pengembangan dan penyempurnaan sistem secara menyeluruh** yang mencakup:
+1. **Peningkatan Performa & Arsitektur Database:** Refactoring total skema basis data PostgreSQL (Supabase) dengan mengintegrasikan aturan *Row Level Security* (RLS) terpadu, fungsi otomatisasi (*triggers*), dan *Database Views* untuk analitik real-time.
+2. **Optimalisasi Alur Pengguna (User Flow):** Penataan ulang hak akses multi-peran (*Admin*, *Nelayan*, dan *Customer Guest*) serta penyempurnaan alur pemesanan langsung tanpa wajib registrasi (*Guest Checkout*).
+3. **Penyempurnaan Antarmuka (UI/UX):** Pembaruan komponen antarmuka yang lebih responsif, bersih, dan siap untuk tahap komersialisasi publik.
 
 ---
 
-## ✨ Fitur Utama
+## 🎓 Konteks Akademik & Program
 
-### 🛒 1. Pembeli Publik (Guest Checkout)
-* **Katalog Produk Interaktif:** Browsing hasil laut segar berdasarkan kategori, harga, dan ketersediaan stok.
-* **Pemesanan Tanpa Login:** Checkout langsung (*Cash on Delivery*) tanpa diwajibkan mendaftar akun.
-* **Manajemen Stok Otomatis:** Stok produk langsung berkurang saat pesanan dibuat dan otomatis kembali jika pesanan dibatalkan.
+Platform ini dikembangkan dan diimplementasikan sebagai bagian dari **Luaran Utama Program Tri Dharma Perguruan Tinggi**:
 
-### ⚓ 2. Nelayan (Penjual)
-* **Pendaftaran & Antrean Otorisasi:** Sistem registrasi akun nelayan dengan status awal *Pending Approval*.
-* **Dashboard Nelayan:** Kelola produk ikan (tambah, edit, atur stok, hapus produk).
-* **Integrasi Timbangan Digital (IoT):** Penarikan data berat timbangan ikan secara *real-time* via API ThingSpeak (ESP32).
-* **Manajemen Pesanan Masuk:** Memantau dan memperbarui status pesanan dari pembeli.
-
-### 🛡️ 3. Admin Marketplace
-* **Sistem Persetujuan Akun:** Meninjau, menyetujui (*Approve*), atau menolak (*Reject*) pendaftaran nelayan baru.
-* **Monitoring System & Analytics:** Laporan penjualan harian/bulanan, performa nelayan, serta ringkasan pendapatan sistem melalui *Database Views*.
-* **Manajemen Pengguna & Produk:** Kontrol penuh terhadap seluruh akun terdaftar dan katalog produk aktif.
+* **Program Pemberdayaan Desa Binaan (PDB) Tahun Anggaran 2025**  
+  Dibiayai oleh **Direktorat Riset, Teknologi, dan Pengabdian kepada Masyarakat (DRPM), Kementerian Pendidikan Tinggi, Sains, dan Teknologi (Kemendiktisaintek) RI** (No. Kontrak: `110/C3/DT.05.00/PM/2025`).
+* **Konsorsium Perguruan Tinggi Kolaboratif**  
+  Kolaborasi resmi antara **Universitas Tadulako** (Host) dan **Universitas Alkhairaat** Palu.
+* **Kuliah Kerja Nyata Tematik (KKN-T) Angkatan 3**  
+  Diintegrasikan langsung dengan pengabdian mahasiswa di lapangan dalam melakukan pendampingan teknis, digitalisasi nelayan, dan pembinaan UMKM pesisir.
+* **Pengembangan Tugas Akhir (TA)**  
+  Dikembangkan oleh **Lukman Hakim** (Mahasiswa S1 Teknik Informatika, Universitas Tadulako) sebagai dasar infrastruktur sistem informasi dalam penulisan Tugas Akhir.
 
 ---
 
-## 🛠️ Tech Stack & Ekosistem
+## 🏆 Capaian & Luaran Program (Impact)
 
-* **Front-End:** React v18, TypeScript, Vite, Tailwind CSS, Shadcn UI / Radix UI
-* **Back-End as a Service (BaaS):** Supabase (PostgreSQL 15, Auth JWT, Row Level Security)
-* **Integrasi Hardware (IoT):** Mikrokontroler ESP32 + Sensor Load Cell via ThingSpeak API
-* **Hosting & CD:** Netlify (Global Edge Network)
+1. **Hak Kekayaan Intelektual (HKI / Hak Cipta):**  
+   Terdaftar resmi di DJKI Kemenkumham RI sebagai Program Komputer dengan Nomor Pencatatan **`EC002025130723`**.
+2. **Infrastruktur IoT & Digitalisasi Bagan:**  
+   Pemasangan unit mikrokontroler Raspberry Pi 5, sensor timbangan digital (*Load Cell*), modem router 4G outdoor, dan display monitor informasi di darat.
+3. **Formalisasi & Legalitas UMKM Mitra:**  
+   Fasilitasi penerbitan 6 Nomor Induk Berusaha (NIB), pendampingan Sertifikasi Halal, serta pendaftaran merek dagang *"Ikan Asin Barakuda Ambesia Selatan Fish"* di PDKI DJKI.
 
 ---
 
-## 📁 Struktur Direktori Proyek
+## 🔑 Fitur Utama Sistem
 
-```text
-SITANPAS/
-├── md/                         # Dokumentasi Arsitektur Proyek (PRD, Architecture, Schema)
-├── public/                     # Asset Statis (Logo, Favicon, _redirects)
-├── src/                        # Source Code Utama Aplikasi
-│   ├── assets/                 # Resource Gambar & Media
-│   ├── components/             # Reusable UI Components (Dashboard, UI, IoT Fetcher)
-│   ├── contexts/               # React Context (AuthContext)
-│   ├── hooks/                  # Custom React Hooks
-│   ├── integrations/supabase/  # Klien & Auto-generated Types Supabase
-│   ├── pages/                  # Route Pages (Landing, Auth, Admin, Dashboard)
-│   ├── utils/                  # Functions & Helper Utilities
-│   ├── App.tsx                 # Root Router & Authorization Guard
-│   └── main.tsx                # Entry Point React
-├── supabase/migrations/        # Migration SQL Script (V2 Clean Architecture)
-├── .env                        # Environment Variables lokal
-├── netlify.toml                # Netlify SPA Redirects & Security Headers Config
-└── package.json                # Project Dependencies & Manifest
-```
+* **Public Customer (Guest Checkout):** Transaksi pembelian ikan segar/kering secara cepat tanpa proses registrasi yang rumit.
+* **Fisherman Dashboard:** Pengelolaan produk ikan, pemantauan pesanan masuk, dan input hasil tangkapan.
+* **Admin Verification & Approval System:** Panel kontrol Admin untuk memverifikasi akun nelayan baru (*Pending/Approve/Reject*) dan memantau analitik pendapatan harian/bulanan.
+* **Stok Automasi & Transaksi:** Pengurangan stok produk secara otomatis saat terjadi transaksi dan pengembalian stok saat pembatalan.
+
+---
+
+## 📚 Dokumentasi Arsitektur Terpisah
+
+Untuk menjaga kebersihan dokumentasi utama, rincian teknis, struktur folder, dan skema database telah dipisahkan ke dalam direktori [`/md`](./md/):
+
+* 📄 **[PRD.md](./md/PRD.md):** *Product Requirement Document* (Detail kebutuhan bisnis, alur pengguna, dan target pengguna).
+* 🏗️ **[ARCHITECTURE.md](./md/ARCHITECTURE.md):** *Tech Stack, Environment Variables, & Presisi Struktur Folder Proyek*.
+* 🗄️ **[SCHEMA.md](./md/SCHEMA.md):** *Struktur Tabel Supabase, Foreign Keys, Trigger Automasi, & Kebijakan RLS*.
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dilindungi di bawah **[MIT License](./LICENSE)**.  
+*SITANPAS v2 © 2026 oleh Lukman Hakim — S1 Teknik Informatika, Universitas Tadulako.*
