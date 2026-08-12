@@ -55,13 +55,15 @@ Platform ini dikembangkan dan diimplementasikan sebagai bagian dari **Luaran Uta
 
 ---
 
-## 📚 Dokumentasi Arsitektur Terpisah
+## 📚 Dokumentasi Arsitektur & Panduan Terpisah
 
-Untuk menjaga kebersihan dokumentasi utama, rincian teknis, struktur folder, dan skema database telah dipisahkan ke dalam direktori [`/md`](./md/):
+Untuk menjaga kebersihan dokumentasi utama, rincian teknis, struktur folder, skema database, hingga panduan instalasi telah dipisahkan ke dalam direktori [`/md`](./md/):
 
 * 📄 **[PRD.md](./md/PRD.md):** *Product Requirement Document* (Detail kebutuhan bisnis, alur pengguna, dan target pengguna).
 * 🏗️ **[ARCHITECTURE.md](./md/ARCHITECTURE.md):** *Tech Stack, Environment Variables, & Presisi Struktur Folder Proyek*.
 * 🗄️ **[SCHEMA.md](./md/SCHEMA.md):** *Struktur Tabel Supabase, Foreign Keys, Trigger Automasi, & Kebijakan RLS*.
+* 🚀 **[Deployment Guide](./md/DEPLOYMENT.md):** *Panduan Siklus Deployment Otomatis via GitHub & Netlify*[cite: 13].
+* 📋 **[System & Environment Requirements](./md/REQUIREMENTS.md):** *Spesifikasi Minimum Perangkat Lunak, Layanan Cloud BaaS, dan Hardware IoT ESP32*[cite: 14].
 
 ---
 
