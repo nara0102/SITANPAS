@@ -151,14 +151,13 @@ export const CheckoutModal = ({ isOpen, onClose, product }: CheckoutModalProps) 
       const constraintCheck = basePrice * formData.quantity;
       const finalTotal = Number(constraintCheck.toFixed(2));
 
-      // Prepare order payload with customer email and user_id for tracking
+      // Prepare order payload with exact matching SQL schema of public.orders
       const orderPayload = {
         produk_id: product.id,
         customer_nama: formData.customerName.trim(),
         customer_telpon: formData.whatsappNumber.trim(),
         customer_email: formData.customerEmail.trim().toLowerCase(),
         customer_alamat: formData.address.trim(),
-        customer_user_id: user?.id || null, // Track authenticated user
         jumlah: formData.quantity,
         harga_satuan: basePrice,
         total_harga: finalTotal,

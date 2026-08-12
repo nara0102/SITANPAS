@@ -57,11 +57,15 @@ export const ProductManagement = () => {
       }
       console.log(`[ProductManagement] Fetched ${data.length} products for nelayan ${user.id}`);
       // Ensure status and unit_type are properly typed
-      const typedProducts = (data || []).map(p => ({
-        ...p,
-        status: p.status as 'active' | 'inactive',
-        unit_type: p.unit_type as 'kg' | 'box'
-      }));
+      const typedProducts = (data || []).map(p => {
+        const unit_type = (p.unit_type === "box" ? "box" : "kg") as 'kg' | 'box'; // normalize to allowed union
+        return {
+          ...p,
+          status: p.status as 'active' | 'inactive',
+          berat_per_unit: p.berat_per_unit && p.berat_per_unit > 0 ? Number(p.berat_per_unit) : 1,
+          unit_type,
+        };
+      });
       setProducts(typedProducts);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -243,9 +247,11 @@ export const ProductManagement = () => {
                   </Badge>
                 </div>
 
-                {product.unit_type === 'kg' && product.berat_per_unit && (
+                {product.berat_per_unit > 0 && (
                   <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">
-                    Berat: {product.berat_per_unit} kg
+                    {product.unit_type === 'box' 
+                      ? `Estimasi Berat: ${product.berat_per_unit} kg/box` 
+                      : `Berat per Unit: ${product.berat_per_unit} kg`}
                   </p>
                 )}
 

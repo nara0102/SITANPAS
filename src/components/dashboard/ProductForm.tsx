@@ -34,8 +34,8 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
     harga: product?.harga || 0,
     stok: product?.stok || 0,
     kategori: product?.kategori || "",
-    berat_per_unit: product?.berat_per_unit || 1,
-    unit_type: (product?.unit_type as 'kg' | 'box') || 'kg',
+    berat_per_unit: product?.berat_per_unit && product.berat_per_unit > 0 ? product.berat_per_unit : 1,
+    unit_type: (product?.unit_type === 'box' ? 'box' : 'kg') as 'kg' | 'box',
   });
 
   const [imageUrl, setImageUrl] = useState<string | null>(product?.image_url || null);
@@ -43,10 +43,12 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
 
-  // Handle unit type change with proper weight reset
+  // Handle unit type change with proper weight validation
   const handleUnitTypeChange = useCallback((checked: boolean) => {
-    const newUnitType = checked ? 'box' : 'kg';
-    const newBeratPerUnit = newUnitType === 'box' ? 0 : (formData.berat_per_unit === 0 ? 1 : formData.berat_per_unit);
+    const newUnitType: 'kg' | 'box' = checked ? 'box' : 'kg';
+    const currentWeight = formData.berat_per_unit;
+    // Ensure weight is never 0 or invalid to avoid DB constraint failures
+    const newBeratPerUnit = currentWeight && currentWeight > 0 ? currentWeight : 1;
     
     setFormData(prev => ({ 
       ...prev, 
@@ -57,7 +59,9 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
 
   // Callback for ThingSpeak weight updates
   const handleWeightUpdate = useCallback((weight: number) => {
-    setFormData(prev => ({ ...prev, berat_per_unit: weight }));
+    if (weight > 0) {
+      setFormData(prev => ({ ...prev, berat_per_unit: weight }));
+    }
   }, []);
 
   // Handle image URL change from ImageUpload component
@@ -73,13 +77,17 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
       // Validate form data using zod schema
       const { productSchema } = await import('@/lib/validation');
       
+      const sanitizedWeight = formData.berat_per_unit && formData.berat_per_unit > 0 
+        ? formData.berat_per_unit 
+        : 1;
+
       const validationData = {
         nama_produk: formData.nama_produk,
         deskripsi: formData.deskripsi || '',
         harga: formData.harga,
         stok: formData.stok,
         kategori: formData.kategori,
-        berat_per_unit: formData.berat_per_unit,
+        berat_per_unit: sanitizedWeight,
         unit_type: formData.unit_type,
       };
 
@@ -102,11 +110,11 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
         harga: formData.harga,
         stok: formData.stok,
         kategori: formData.kategori,
-        berat_per_unit: formData.berat_per_unit,
+        berat_per_unit: sanitizedWeight,
         unit_type: formData.unit_type,
         image_url: imageUrl,
         nelayan_id: user?.id,
-        status: 'active', // Explicitly set status as active for new products
+        status: 'active',
       };
 
       if (product) {
@@ -146,14 +154,20 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 lg:space-y-6">
-      {/* Form Fields - Responsive Layout */}
       <div className="space-y-3 sm:space-y-4 lg:space-y-6">
         {/* Product Name */}
         <div>
           <Label htmlFor="nama_produk" className="text-sm sm:text-base font-medium">
             Nama Ikan *
           </Label>
-          <Input id="nama_produk" value={formData.nama_produk} onChange={(e) => setFormData({ ...formData, nama_produk: e.target.value })} placeholder="Contoh: Ikan Tuna Segar" required className="mt-2 text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-3" />
+          <Input 
+            id="nama_produk" 
+            value={formData.nama_produk} 
+            onChange={(e) => setFormData({ ...formData, nama_produk: e.target.value })} 
+            placeholder="Contoh: Ikan Tuna Segar" 
+            required 
+            className="mt-2 text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-3" 
+          />
         </div>
 
         {/* Product Description */}
@@ -176,7 +190,14 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
           <Label htmlFor="kategori" className="text-sm sm:text-base font-medium">
             Kategori *
           </Label>
-          <Input id="kategori" value={formData.kategori} onChange={(e) => setFormData({ ...formData, kategori: e.target.value })} placeholder="Contoh: Ikan Laut" required className="mt-2 text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-3" />
+          <Input 
+            id="kategori" 
+            value={formData.kategori} 
+            onChange={(e) => setFormData({ ...formData, kategori: e.target.value })} 
+            placeholder="Contoh: Ikan Laut" 
+            required 
+            className="mt-2 text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-3" 
+          />
         </div>
 
         {/* Unit Type Switch */}
@@ -185,12 +206,16 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
             Unit Penjualan *
           </Label>
           <div className="flex items-center space-x-4">
-            <span className={`text-sm ${formData.unit_type === 'kg' ? 'font-semibold text-primary' : 'text-muted-foreground'}`}>Kilogram</span>
+            <span className={`text-sm ${formData.unit_type === 'kg' ? 'font-semibold text-primary' : 'text-muted-foreground'}`}>
+              Kilogram
+            </span>
             <Switch 
               checked={formData.unit_type === 'box'} 
               onCheckedChange={handleUnitTypeChange}
             />
-            <span className={`text-sm ${formData.unit_type === 'box' ? 'font-semibold text-primary' : 'text-muted-foreground'}`}>Box</span>
+            <span className={`text-sm ${formData.unit_type === 'box' ? 'font-semibold text-primary' : 'text-muted-foreground'}`}>
+              Box
+            </span>
           </div>
         </div>
 
@@ -228,11 +253,10 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
             />
           </div>
 
-        {/* Weight Input - Only for kg units */}
-        {formData.unit_type === 'kg' && (
+          {/* Weight Input - Always visible with dynamic labels */}
           <div>
             <Label htmlFor="berat" className="text-sm sm:text-base font-medium">
-              Berat (kg) *
+              {formData.unit_type === 'box' ? 'Berat per Box (kg) *' : 'Berat (kg) *'}
             </Label>
             <Input
               id="berat"
@@ -241,29 +265,24 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
               step="0.01"
               value={formData.berat_per_unit}
               onChange={(e) => setFormData({ ...formData, berat_per_unit: Number(e.target.value) })}
-              placeholder="1.0"
+              placeholder={formData.unit_type === 'box' ? "10.0" : "1.0"}
               required
               className="mt-2 text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-3 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
             />
           </div>
-        )}
         </div>
 
-
-
-        {/* ThingSpeak Weight Sensor - Always rendered but conditionally visible */}
-        <div style={{ display: formData.unit_type === 'kg' ? 'block' : 'none' }}>
+        {/* ThingSpeak Weight Sensor Fetcher */}
+        <div>
           <ThingSpeakWeightFetcher
             onWeightUpdate={handleWeightUpdate}
-            autoRefresh={formData.unit_type === 'kg'}
+            autoRefresh={true}
             refreshInterval={15000}
             className="mb-4"
           />
         </div>
 
-
-
-        {/* Image Upload - Using new ImageUpload component */}
+        {/* Image Upload */}
         <div>
           <Label className="text-sm sm:text-base font-medium">Foto Produk</Label>
           <div className="mt-2 sm:mt-3">
@@ -274,11 +293,9 @@ export const ProductForm = ({ product, onSuccess }: ProductFormProps) => {
             />
           </div>
         </div>
-
-
       </div>
 
-      {/* Submit Button - Responsive */}
+      {/* Submit Button */}
       <div className="flex gap-3 pt-3 sm:pt-4 lg:pt-6 border-t">
         <Button type="submit" disabled={loading} className="flex-1 text-sm sm:text-base px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3">
           {loading ? "Menyimpan..." : product ? "Perbarui Produk" : "Tambah Produk"}
