@@ -33,7 +33,7 @@ export const useFishProducts = () => {
       setLoading(true);
       setError(null);
       
-      // Fetch products
+      // 1. Fetch active products
       const { data: productsData, error: fetchError } = await supabase
         .from('products')
         .select('*')
@@ -48,34 +48,33 @@ export const useFishProducts = () => {
         return;
       }
 
-      // Get unique nelayan IDs
+      // 2. Get unique nelayan IDs
       const nelayanIds = [...new Set(productsData.map(p => p.nelayan_id))];
       
-      // Fetch fishermen data from users table
-      const { data: usersData, error: usersError } = await supabase
-        .from('users')
-        .select('id, full_name, location')
+      // 3. Fetch fishermen data bypassing generic type checks
+      const { data: usersData, error: usersError } = await (supabase.from('users') as any)
+        .select('*')
         .in('id', nelayanIds);
 
       if (usersError) {
         console.warn('Could not fetch fishermen data:', usersError);
       }
 
-      // Create a map for quick user lookup
+      // 4. Create lookup map
       const usersMap = new Map(
-        (usersData || []).map(user => [user.id, user])
+        (usersData || []).map((user: any) => [user.id, user])
       );
 
-      // Map products with user data
+      // 5. Map products with user data
       const productsWithUserData = productsData.map(product => {
-        const user = usersMap.get(product.nelayan_id);
+        const user: any = usersMap.get(product.nelayan_id);
         return {
           ...product,
           status: product.status as 'active' | 'inactive',
           unit_type: product.unit_type as 'kg' | 'box',
           users: user ? {
-            nama_lengkap: user.full_name || 'Nelayan',
-            address: user.location || 'Indonesia'
+            nama_lengkap: user.nama_lengkap || user.full_name || user.email?.split('@')[0] || 'Nelayan',
+            address: user.address || user.location || 'Indonesia'
           } : undefined
         };
       });
@@ -106,7 +105,7 @@ export const useFishProducts = () => {
     
     initializeProducts();
 
-    // Set up real-time subscription with unique channel name
+    // Set up real-time subscription
     const channel = supabase
       .channel('customer_products_realtime')
       .on(
@@ -119,42 +118,35 @@ export const useFishProducts = () => {
         (payload) => {
           if (!mounted) return;
           
-          // Handle different types of changes
           if (payload.eventType === 'UPDATE') {
-            // For updates, we can be more specific and update just the changed product
             const updatedProduct = payload.new as FishProduct;
             if (updatedProduct && updatedProduct.status === 'active' && updatedProduct.stok > 0) {
               setProducts(prevProducts => {
                 const existingIndex = prevProducts.findIndex(p => p.id === updatedProduct.id);
                 if (existingIndex >= 0) {
-                  // Update existing product
                   const newProducts = [...prevProducts];
                   newProducts[existingIndex] = { ...newProducts[existingIndex], ...updatedProduct };
                   return newProducts;
                 } else {
-                  // Product might be newly available, refetch all
                   if (mounted) fetchProducts();
                   return prevProducts;
                 }
               });
             } else {
-              // Product became unavailable or out of stock, remove from list
               setProducts(prevProducts => prevProducts.filter(p => p.id !== updatedProduct.id));
             }
           } else {
-            // For INSERT/DELETE, refresh all products
             if (mounted) fetchProducts();
           }
         }
       )
       .subscribe();
 
-    // Cleanup subscription on unmount
     return () => {
       mounted = false;
       supabase.removeChannel(channel);
     };
-  }, [fetchProducts]); // Include fetchProducts as dependency
+  }, [fetchProducts]);
 
   const refetch = () => {
     fetchProducts();

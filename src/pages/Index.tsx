@@ -92,8 +92,17 @@ const Index = () => {
                     stock_unit={product.unit_type}
                     berat_per_unit={product.berat_per_unit}
                     unit_type={product.unit_type}
-                    fishermanName={product.users?.nama_lengkap || "Nelayan"}
-                    location={product.users?.address || "Indonesia"}
+                    fishermanName={
+                      product.users?.nama_lengkap || 
+                      (product.users as any)?.full_name || 
+                      (product as any).profiles?.full_name || 
+                      "Nelayan"
+                    }
+                    location={
+                      product.users?.address || 
+                      (product.users as any)?.location || 
+                      "Indonesia"
+                    }
                     description={product.deskripsi || ""}
                     fisherman_id={product.nelayan_id}
                   />
