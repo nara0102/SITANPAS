@@ -63,12 +63,15 @@ const Auth = () => {
           // If user doesn't exist in users table, create a basic profile
           if (!userData) {
             console.log("User not found in users table, creating basic profile...");
+            const userFullName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Nelayan';
+
             const { error: insertError } = await supabase.from("users").insert({
               id: user.id,
               email: user.email,
               role: "customer_guest",
               status: "active",
-              full_name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
+              full_name: userFullName,
+              nama_lengkap: userFullName,
               phone: user.user_metadata?.phone || null,
               address: user.user_metadata?.location || null
             });
