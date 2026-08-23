@@ -26,7 +26,7 @@ export const useWebsiteSettings = () => {
     loading,
     error,
     siteName: 'SITANPAS v2',
-    siteDescription: 'Marketplace Nelayan',
+    siteDescription: 'Sistem Informasi Tangkapan Nelayan dan Pemasaran',
     siteLogo: '/favicon.ico',
     siteIcon: '/favicon.ico'
   };

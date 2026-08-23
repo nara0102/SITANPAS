@@ -48,7 +48,11 @@ export const Navbar = () => {
             </div>
             <div>
               <h1 className="font-bold text-base sm:text-lg md:text-xl text-primary">{settingsLoading ? "" : siteName}</h1>
-              <p className="text-xs text-muted-foreground hidden sm:block">{settingsLoading ? "" : siteDescription}</p>
+              <a 
+                href="https://doi.org/10.13140/RG.2.2.25645.45285" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-xs text-muted-foreground hidden sm:block">{settingsLoading ? "" : siteDescription}</a>
             </div>
           </div>
 
