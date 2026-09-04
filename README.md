@@ -62,12 +62,12 @@ Untuk menjaga kebersihan dokumentasi utama, rincian teknis, struktur folder, ske
 * 📄 **[PRD.md](./md/PRD.md):** *Product Requirement Document* (Detail kebutuhan bisnis, alur pengguna, dan target pengguna).
 * 🏗️ **[ARCHITECTURE.md](./md/ARCHITECTURE.md):** *Tech Stack, Environment Variables, & Presisi Struktur Folder Proyek*.
 * 🗄️ **[SCHEMA.md](./md/SCHEMA.md):** *Struktur Tabel Supabase, Foreign Keys, Trigger Automasi, & Kebijakan RLS*.
-* 🚀 **[Deployment Guide](./md/DEPLOYMENT.md):** *Panduan Siklus Deployment Otomatis via GitHub & Netlify*[cite: 13].
-* 📋 **[System & Environment Requirements](./md/REQUIREMENTS.md):** *Spesifikasi Minimum Perangkat Lunak, Layanan Cloud BaaS, dan Hardware IoT ESP32*[cite: 14].
+* 🚀 **[Deployment Guide](./md/DEPLOYMENT.md):** *Panduan Siklus Deployment Otomatis via GitHub & Netlify*.
+* 📋 **[System & Environment Requirements](./md/REQUIREMENTS.md):** *Spesifikasi Minimum Perangkat Lunak, Layanan Cloud BaaS, dan Hardware IoT ESP32*.
 
 ---
 
 ## 📄 Lisensi
 
 Proyek ini dilindungi di bawah **[MIT License](./LICENSE)**.  
-*SITANPAS v2 © 2026 oleh Lukman Hakim — S1 Teknik Informatika, Universitas Tadulako.*
+*SITANPAS v2 © 2026 oleh Lukman Hakim — Program Studi Teknik Informatika, Fakultas Teknik, Universitas Tadulako.*
